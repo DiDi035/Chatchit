@@ -7,10 +7,19 @@ const myPeer = new Peer(undefined, {
 });
 
 socket.on("user-disconnected", (userID) => {
-    // $.ajax({
-    //     type: "GET",
-    //     url: "/"
-    // })
+  console.log("VO DAY ROI NE");
+  $.ajax({
+    type: "POST",
+    url: "/disconnected",
+    success: (res) => {
+      if (res.redirect) {
+        window.location.href = res.redirect_url;
+      }
+    },
+    error: (request, error) => {
+      console.log("Request: " + JSON.stringify(request));
+    },
+  });
 });
 
 const myVideo = document.createElement("video");

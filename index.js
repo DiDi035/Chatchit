@@ -25,12 +25,19 @@ app.get("/chatroom/:roomID", (req, res) => {
   res.render("index", { roomID });
 });
 
-app.get("/Welcome", (req, res) => {
+app.get("/welcome", (req, res) => {
   res.render("welcomePage");
 });
 
-app.get("/Select", (req, res) => {
-    res.render("welcomePage");
+app.get("/select", (req, res) => {
+  res.send("DU MA MAY");
+});
+
+app.post("/disconnected", (req, res) => {
+  res.json({
+    redirect: true,
+    redirect_url: "http://localhost:3000/select",
+  });
 });
 
 io.on("connection", (socket) => {
@@ -38,7 +45,8 @@ io.on("connection", (socket) => {
     // console.log("vo dc day roi ne");
     socket.join(roomID);
     socket.to(roomID).broadcast.emit("user-connected", userID);
-    socket.on("disconnected", () => {
+    socket.on("disconnect", () => {
+      console.log("DIS ROI KIA BA");
       socket.to(roomID).broadcast.emit("user-disconnected", userID);
     });
   });
