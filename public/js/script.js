@@ -86,7 +86,7 @@ const AddVideoStream = (video, stream, isMode, wrapper) => {
           video,
           new faceapi.TinyFaceDetectorOptions()
         );
-        if (detections[0] != undefined) {
+        if (MODE != "Normal" && detections[0] != undefined) {
           const box = detections[0].box;
           // console.log(box);
           const x = box.x;
@@ -94,7 +94,7 @@ const AddVideoStream = (video, stream, isMode, wrapper) => {
           const width = box.width;
           const height = box.height;
           const img = new Image();
-          img.src = "/images/spider-man.png";
+          if (MODE == "Super-hero") img.src = "/images/spider-man.png";
           canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
           canvas
             .getContext("2d")
@@ -112,8 +112,7 @@ const ConnectToNewUser = (newUserID, stream) => {
       secondVideo,
       userVideoStream,
       isModeSecond,
-      videoWrapperSecond,
-      secondVideoCanvas
+      videoWrapperSecond
     );
   });
   call.on("close", () => {

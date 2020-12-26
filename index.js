@@ -12,22 +12,13 @@ const uniStack = {
 };
 
 app.set("view engine", "ejs");
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-app.get("/chatroom", (req, res) => {
-  if (curQueueChatRoom.length == 0) {
-    const newIdRoom = uuidV4();
-    curQueueChatRoom.push(newIdRoom);
-    res.redirect("/chatroom/" + newIdRoom);
-  } else {
-    let roomID = curQueueChatRoom.pop();
-    res.redirect("/chatroom/" + roomID);
-  }
-});
-
-app.get("/chatroom/:roomID", (req, res) => {
-  const { roomID } = req.params;
-  res.render("MainPage", { roomID });
+app.get("/chatroom/:roomID/:mode", (req, res) => {
+  const { roomID, mode } = req.params;
+  res.render("MainPage", { roomID, mode });
 });
 
 app.get("/", (req, res) => {
@@ -36,6 +27,18 @@ app.get("/", (req, res) => {
 
 app.get("/select", (req, res) => {
   res.render("StartView");
+});
+
+app.post("/start", (req, res) => {
+  const { uni, mode } = req.body;
+  if (uniStack[uni].length == 0) {
+    const newIdRoom = uuidV4();
+    uniStack[uni].push(newIdRoom);
+    res.redirect("/chatroom/" + newIdRoom + "/" + mode);
+  } else {
+    let roomID = uniStack[uni].pop();
+    res.redirect("/chatroom/" + roomID + "/" + mode);
+  }
 });
 
 app.post("/disconnected", (req, res) => {
@@ -47,11 +50,9 @@ app.post("/disconnected", (req, res) => {
 
 io.on("connection", (socket) => {
   socket.on("join-room", (roomID, userID) => {
-    // console.log("vo dc day roi ne");
     socket.join(roomID);
     socket.to(roomID).broadcast.emit("user-connected", userID);
     socket.on("disconnect", () => {
-      console.log("DIS ROI KIA BA");
       socket.to(roomID).broadcast.emit("user-disconnected", userID);
     });
   });
