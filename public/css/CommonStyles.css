@@ -20,10 +20,11 @@
 }
 
 .bg-image {
-    background-image: url(/images/Background.jpg);
+    background-image: url(../images/Background.jpg);
     background-repeat: no-repeat;
     background-position: bottom;
     background-size: cover;
     min-height: 100%;
+    max-width: 100%;
 }
 
