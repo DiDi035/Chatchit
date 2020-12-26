@@ -1,0 +1,19 @@
+{
+  "name": "chatchit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lisu35/Chatchit.git"
+  },
+  "author": "KLD team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lisu35/Chatchit/issues"
+  },
+  "homepage": "https://github.com/Lisu35/Chatchit#readme"
+}
