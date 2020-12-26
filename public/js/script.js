@@ -6,7 +6,12 @@ const myPeer = new Peer(undefined, {
   port: 3001,
 });
 
-socket.on("user-disconnected", (userID) => {});
+socket.on("user-disconnected", (userID) => {
+    // $.ajax({
+    //     type: "GET",
+    //     url: "/"
+    // })
+});
 
 const myVideo = document.createElement("video");
 myVideo.muted = true;

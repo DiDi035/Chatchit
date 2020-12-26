@@ -25,6 +25,14 @@ app.get("/chatroom/:roomID", (req, res) => {
   res.render("index", { roomID });
 });
 
+app.get("/Welcome", (req, res) => {
+  res.render("welcomePage");
+});
+
+app.get("/Select", (req, res) => {
+    res.render("welcomePage");
+});
+
 io.on("connection", (socket) => {
   socket.on("join-room", (roomID, userID) => {
     // console.log("vo dc day roi ne");
