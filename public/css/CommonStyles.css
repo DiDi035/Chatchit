@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Bahnschrift';
+    src: url(../fonts/BAHNSCHRIFT.TTF) format('truetype');
+}
+
+.font {
+    font-family: 'Bahnschrift';
+}
+
+.text-decoration-underline {
+    text-decoration: underline;
+}
+
+.no-bg {
+    background: none;
+}
+
+.no-border {
+    border: none;
+}
+
+.bg-image {
+    background-image: url(/images/Background.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    min-height: 100%;
+}
+
