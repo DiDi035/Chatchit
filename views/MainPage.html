@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ChatChit</title>
+    <!-- link css files here -->
+    <link rel="stylesheet" href="../public/css/colors.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="../public/css/CommonStyles.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="../public/css/MainPage.css" type="text/css" />
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body class="bg-Blue font Navy">
+    <div class="wrapper w-100">
+      <!-- Sidebar -->
+      <nav id="sidebar">
+        <button class="btn btn-dark sidebar-header w-100 py-2">Add a picture</button>
+        <ul class="list-unstyled components bg-light h-75">
+          <li>
+            <img src="" alt="" />
+          </li>
+          <li>
+            <img src="" alt="" />
+          </li>
+          <li>
+            <img src="" alt="" />
+          </li>
+        </ul>
+      </nav>
+      <!-- Page Content -->
+      <div id="content" class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-Blue">
+          <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn bg-Blue">
+              <span
+                class="iconify"
+                data-inline="false"
+                data-icon="cil:hamburger-menu"
+                style="font-size: 30px"
+              ></span>
+            </button>
+            <button class="no-bg no-border">
+                <span
+                  class="iconify"
+                  data-inline="false"
+                  data-icon="ic:sharp-report"
+                  style="font-size: 30px"
+                ></span>
+              </button>
+          </div>
+        </nav>
+        <div class="container-fluid">
+          <div class="row p-1">
+            <div class="col-6">
+                <video src="" controls class="w-100" height="550px"></video>
+            </div>
+            <div class="col-6">
+                <video src="" controls class="w-100" height="550px"></video>
+            </div>
+          </div>
+          <div class="row py-3 justify-content-center">
+            <a
+                href="#"
+                class="btn btn-light btn-change rounded-pill px-5 font-size-20"
+                role="button"
+                aria-pressed="true"
+                >End call</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $("#sidebarCollapse").on("click", function () {
+          $("#sidebar").toggleClass("active");
+        });
+      });
+    </script>
+  </body>
+</html>
