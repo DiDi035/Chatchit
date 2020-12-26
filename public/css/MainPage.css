@@ -1,72 +1,81 @@
-html, body {
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
+html,
+body {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
 }
 
 .wrapper {
-    display: flex;
-    align-items: stretch;
+  display: flex;
+  align-items: stretch;
 }
 
 #sidebar {
-    min-width: 300px;
-    max-width: 300px;
-    min-height: 100vh;
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 100vh;
 }
 
 #sidebar.active {
-    margin-left: -300px;
+  margin-left: -300px;
 }
 
 a[data-toggle="collapse"] {
-    position: relative;
+  position: relative;
 }
 
 .dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
 }
 
 @media (max-width: 768px) {
-    #sidebar {
-        margin-left: -300px;
-    }
-    #sidebar.active {
-        margin-left: 0;
-    }
+  #sidebar {
+    margin-left: -300px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
 }
 
 .btn-light {
-    background-color: #DA7B08 !important;
-    font-size: 20px !important;
-    border-radius: 15px !important;
+  background-color: #da7b08 !important;
+  font-size: 20px !important;
+  border-radius: 15px !important;
 }
 
 .a-custom:hover {
-    color: #DA7B08;
-    display: inline-block;
-    text-decoration: underline;
-    text-decoration-color: #DA7B08;
-  }
-  
-.btn-change {
-    border: 0px;
-    font-size: 20px;
-    box-shadow: 0 0 1px #ffffff;
-    animation-timing-function: linear;
-    transition-duration: 0.5s;
-    box-shadow: 0px 0 0 #69302C inset;
+  color: #da7b08;
+  display: inline-block;
+  text-decoration: underline;
+  text-decoration-color: #da7b08;
 }
-  
+
+.btn-change {
+  border: 0px;
+  font-size: 20px;
+  box-shadow: 0 0 1px #ffffff;
+  animation-timing-function: linear;
+  transition-duration: 0.5s;
+  box-shadow: 0px 0 0 #69302c inset;
+}
+
 .btn-change:hover {
-    box-shadow: 180px 0 0 #69302C inset;
-    color: #DA7B08 !important;
+  box-shadow: 180px 0 0 #69302c inset;
+  color: #da7b08 !important;
 }
 
 .fix-width {
-    width: 90%;
+  width: 90%;
+}
+
+#videoWrapperFirst {
+  display: flex;
+}
+
+#videoWrapperSecond {
+  display: flex;
 }
