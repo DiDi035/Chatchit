@@ -1,4 +1,13 @@
-const videoGrid = document.getElementById("video-grid");
+const firstVideo = document.getElementById("firstVideo");
+const secondVideo = document.getElementById("secondVideo");
+const displaySizeFirst = {
+  width: firstVideo.width,
+  height: firstVideo.height,
+};
+const displaySizeSecond = {
+  width: secondVideo.width,
+  height: secondVideo.height,
+};
 const socket = io("/");
 
 const myPeer = new Peer(undefined, {
@@ -6,10 +15,9 @@ const myPeer = new Peer(undefined, {
   port: 3001,
 });
 
-faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+// faceapi.nets.tinyFaceDetector.loadFromUri("/models");
 
 socket.on("user-disconnected", (userID) => {
-  console.log("VO DAY ROI NE");
   $.ajax({
     type: "POST",
     url: "/disconnected",
@@ -24,21 +32,18 @@ socket.on("user-disconnected", (userID) => {
   });
 });
 
-const myVideo = document.createElement("video");
-myVideo.muted = true;
 navigator.mediaDevices
   .getUserMedia({
     video: true,
     audio: true,
   })
   .then((stream) => {
-    AddVideoStream(myVideo, stream);
+    AddVideoStream(firstVideo, stream);
 
     myPeer.on("call", (call) => {
       call.answer(stream);
-      const video = document.createElement("video");
       call.on("stream", (userVideoStream) => {
-        AddVideoStream(video, userVideoStream);
+        AddVideoStream(secondVideo, userVideoStream);
       });
     });
 
@@ -55,48 +60,39 @@ myPeer.on("open", (userID) => {
 });
 
 const AddVideoStream = (video, stream) => {
-  video.height = 560;
-  video.width = 720;
-  const displaySize = {
-    width: video.width,
-    height: video.height,
-  };
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
   });
-  video.addEventListener("playing", () => {
-    const canvas = faceapi.createCanvasFromMedia(video);
-    console.log(canvas);
-    faceapi.matchDimensions(canvas, displaySize);
-    setInterval(async () => {
-      const detections = await faceapi.detectAllFaces(
-        video,
-        new faceapi.TinyFaceDetectorOptions()
-      );
-      // console.log(detections[0]);
-      canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-      if (detections[0] != undefined) {
-        const box = detections[0].box;
-        const x = box.x;
-        const y = box.y;
-        const width = box.width;
-        const height = box.height;
-        const img = new Image();
-        img.src = "/images/spider-man.png";
-        canvas.getContext("2d").drawImage(img, x, y, width, height);
-      }
-    }, 100);
-    videoGrid.append(video);
-    document.body.append(canvas);
-  });
+  // video.addEventListener("playing", () => {
+  //   const canvas = faceapi.createCanvasFromMedia(video);
+  //   faceapi.matchDimensions(canvas, displaySize);
+  //   setInterval(async () => {
+  //     const detections = await faceapi.detectAllFaces(
+  //       video,
+  //       new faceapi.TinyFaceDetectorOptions()
+  //     );
+  //     // console.log(detections[0]);
+  //     canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+  //     if (detections[0] != undefined) {
+  //       const box = detections[0].box;
+  //       const x = box.x;
+  //       const y = box.y;
+  //       const width = box.width;
+  //       const height = box.height;
+  //       const img = new Image();
+  //       img.src = "/images/spider-man.png";
+  //       canvas.getContext("2d").drawImage(img, x, y, width, height);
+  //     }
+  //   }, 100);
+  //   document.body.append(canvas);
+  // });
 };
 
 const ConnectToNewUser = (newUserID, stream) => {
   const call = myPeer.call(newUserID, stream);
-  const video = document.createElement("video");
   call.on("stream", (userVideoStream) => {
-    AddVideoStream(video, userVideoStream);
+    AddVideoStream(secondVideo, userVideoStream);
   });
   call.on("close", () => {
     video.remove();

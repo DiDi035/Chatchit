@@ -22,7 +22,7 @@ app.get("/chatroom", (req, res) => {
 
 app.get("/chatroom/:roomID", (req, res) => {
   const { roomID } = req.params;
-  res.render("index", { roomID });
+  res.render("MainPage", { roomID });
 });
 
 app.get("/welcome", (req, res) => {
@@ -30,7 +30,7 @@ app.get("/welcome", (req, res) => {
 });
 
 app.get("/select", (req, res) => {
-  res.send("DU MA MAY");
+  res.render("StartView");
 });
 
 app.post("/disconnected", (req, res) => {
