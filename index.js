@@ -4,7 +4,12 @@ const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const { v4: uuidV4 } = require("uuid");
 
-let curQueueChatRoom = [];
+const uniStack = {
+  HCMUS: [],
+  HCMUET: [],
+  HCMUE: [],
+  HCMUI: [],
+};
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -25,8 +30,8 @@ app.get("/chatroom/:roomID", (req, res) => {
   res.render("MainPage", { roomID });
 });
 
-app.get("/welcome", (req, res) => {
-  res.render("welcomePage");
+app.get("/", (req, res) => {
+  res.render("WelcomePage");
 });
 
 app.get("/select", (req, res) => {
