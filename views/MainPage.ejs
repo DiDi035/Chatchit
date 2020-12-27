@@ -15,78 +15,45 @@
     />
   </head>
   <body class="bg-Blue font Navy">
-    <div class="wrapper w-100">
-      <!-- Sidebar -->
-      <nav id="sidebar">
-        <button class="btn btn-dark sidebar-header w-100 py-2">
-          Add a picture
-        </button>
-        <ul class="list-unstyled components bg-light h-75">
-          <li>
-            <img src="" alt="" />
-          </li>
-          <li>
-            <img src="" alt="" />
-          </li>
-          <li>
-            <img src="" alt="" />
-          </li>
-        </ul>
-      </nav>
-      <!-- Page Content -->
-      <div id="content" class="w-100">
-        <nav class="navbar navbar-expand-lg navbar-light bg-Blue">
-          <div class="container-fluid">
-            <button type="button" id="sidebarCollapse" class="btn bg-Blue">
-              <span
-                class="iconify"
-                data-inline="false"
-                data-icon="cil:hamburger-menu"
-                style="font-size: 30px"
-              ></span>
-            </button>
-            <button class="no-bg no-border">
-              <span
-                class="iconify"
-                data-inline="false"
-                data-icon="ic:sharp-report"
-                style="font-size: 30px"
-              ></span>
-            </button>
-          </div>
-        </nav>
-        <div class="container-fluid">
-          <div class="row p-1">
-            <div class="col-6" id="videoWrapperFirst">
-              <video
-                src=""
-                class="w-100"
-                width="720px"
-                height="550px"
-                id="firstVideo"
-                muted
-              ></video>
-            </div>
-            <div class="col-6" id="videoWrapperSecond">
-              <video
-                src=""
-                class="w-100"
-                height="550px"
-                id="secondVideo"
-              ></video>
-            </div>
-          </div>
-          <div class="row py-3 justify-content-center">
-            <a
-              href="#"
-              class="btn btn-light btn-change rounded-pill px-5 font-size-20"
-              role="button"
-              aria-pressed="true"
-              >End call</a
-            >
-          </div>
+    <div class="container-fluid">
+      <div class="row p-2">
+        <div class="col-6" id="videoWrapperFirst">
+          <video
+            src=""
+            class=""
+            width="1000px"
+            height="850px"
+            id="firstVideo"
+            muted
+          ></video>
+        </div>
+        <div class="col-6" id="videoWrapperSecond">
+          <video
+            src=""
+            width="1000px"
+            height="850px"
+            id="secondVideo"
+          ></video>
         </div>
       </div>
+      <div class="row justify-content-center">
+        <a
+          href="#"
+          class="btn btn-light btn-change rounded-pill px-5 font-size-20"
+          role="button"
+          aria-pressed="true"
+          >End call</a
+        >
+        <button class="no-bg no-border">
+          <span
+            class="iconify"
+            data-inline="false"
+            data-icon="ic:sharp-report"
+            style="font-size: 30px"
+          ></span>
+        </button>
+      </div>
+    </div>
     </div>
 
     <script src="https://code.iconify.design/1/1.0.6/iconify.min.js"></script>

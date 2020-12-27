@@ -1,9 +1,9 @@
 const firstVideo = document.getElementById("firstVideo");
 const secondVideo = document.getElementById("secondVideo");
-const isModeFirst = true;
-const isModeSecond = false;
 const videoWrapperFirst = document.getElementById("videoWrapperFirst");
 const videoWrapperSecond = document.getElementById("videoWrapperSecond");
+
+let mMap = new Map();
 
 const startVideo = () => {
   navigator.mediaDevices
@@ -12,16 +12,15 @@ const startVideo = () => {
       audio: true,
     })
     .then((stream) => {
-      AddVideoStream(firstVideo, stream, isModeFirst, videoWrapperFirst);
-
+      AddVideoStream(firstVideo, stream, videoWrapperFirst, MODE);
       myPeer.on("call", (call) => {
         call.answer(stream);
         call.on("stream", (userVideoStream) => {
           AddVideoStream(
             secondVideo,
             userVideoStream,
-            isModeSecond,
-            videoWrapperSecond
+            videoWrapperSecond,
+            MODE
           );
         });
       });
@@ -62,15 +61,16 @@ socket.on("user-disconnected", (userID) => {
 });
 
 myPeer.on("open", (userID) => {
+  mMap.set(userID, MODE);
   socket.emit("join-room", ROOM_ID, userID);
 });
 
-const AddVideoStream = (video, stream, isMode, wrapper) => {
+const AddVideoStream = (video, stream, wrapper, mode) => {
   video.srcObject = stream;
   video.addEventListener("loadedmetadata", () => {
     video.play();
   });
-  if (isMode) {
+  if (mode != "Normal") {
     const displaySize = {
       width: video.width,
       height: video.height,
@@ -86,19 +86,18 @@ const AddVideoStream = (video, stream, isMode, wrapper) => {
           video,
           new faceapi.TinyFaceDetectorOptions()
         );
-        if (MODE != "Normal" && detections[0] != undefined) {
+        if (detections[0] != undefined) {
           const box = detections[0].box;
-          // console.log(box);
           const x = box.x;
           const y = box.y;
           const width = box.width;
           const height = box.height;
           const img = new Image();
-          if (MODE == "Super-hero") img.src = "/images/spider-man.png";
+          if (mode == "Super-hero") img.src = "/images/spider-man.png";
           canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
           canvas
             .getContext("2d")
-            .drawImage(img, x + 20, y - 20, width + 40, height + 40);
+            .drawImage(img, x + 100, y+120, width + 60, height + 80);
         }
       }, 100);
     });
@@ -108,12 +107,8 @@ const AddVideoStream = (video, stream, isMode, wrapper) => {
 const ConnectToNewUser = (newUserID, stream) => {
   const call = myPeer.call(newUserID, stream);
   call.on("stream", (userVideoStream) => {
-    AddVideoStream(
-      secondVideo,
-      userVideoStream,
-      isModeSecond,
-      videoWrapperSecond
-    );
+    const mode = mMap.get(newUserID);
+    AddVideoStream(secondVideo, userVideoStream, videoWrapperSecond, mode);
   });
   call.on("close", () => {
     video.remove();

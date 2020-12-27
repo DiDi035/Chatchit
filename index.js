@@ -4,6 +4,8 @@ const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const { v4: uuidV4 } = require("uuid");
 
+let mapID = new Map();
+ 
 const uniStack = {
   HCMUS: [],
   HCMUET: [],
@@ -49,9 +51,20 @@ app.post("/disconnected", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  socket.on("join-room", (roomID, userID) => {
+  socket.on("join-room", (roomID, userID, mode) => {
+    let tmp = mapID.get(roomID);
+    if (tmp == undefined) {
+      mapID.set(roomID, {
+        first: mode,
+        second: undefined,
+      });
+    } else {
+      tmp.second = mode;
+      mapID.set(roomID, tmp);
+    }
+
     socket.join(roomID);
-    socket.to(roomID).broadcast.emit("user-connected", userID);
+    socket.to(roomID).broadcast.emit("user-connected", userID, tmp);
     socket.on("disconnect", () => {
       socket.to(roomID).broadcast.emit("user-disconnected", userID);
     });
