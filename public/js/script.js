@@ -97,7 +97,7 @@ const AddVideoStream = (video, stream, wrapper, mode) => {
           canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
           canvas
             .getContext("2d")
-            .drawImage(img, x + 100, y+120, width + 60, height + 80);
+            .drawImage(img, x+40, y, width, height + 60);
         }
       }, 100);
     });
